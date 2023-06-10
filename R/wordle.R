@@ -34,20 +34,20 @@ filter_greens <- function(words, greens = "-----"){
 #' Filter word list to those consistent with yellows
 #'
 #' @param words A character vector of words to filter.
-#' @param yellows A list of length 5. Each element is a character vector of yellows at that position.
+#' @param yellows A character vector of length 5. Each element is a string of yellows at that position. If no yellows at a position, string should be "".
 #' @returns A character vector of filtered words
-filter_yellows <- function(words, yellows){
+filter_yellows <- function(words, yellows = rep("", 5)){
   yellows <- lapply(yellows, toupper)
   # Yellow excludes filter
   yellow_exclude_regex <-
-    lapply(yellows, function(i){
+    sapply(yellows, function(i){
       if (identical(i, '')){
         '[A-Z]'
       } else {
         paste0('[^', paste(i, collapse = ''), ']')
       }
     })
-  yellow_exclude_regex <- paste(unlist(yellow_exclude_regex), collapse = '')
+  yellow_exclude_regex <- paste(yellow_exclude_regex, collapse = '')
   words <- grep(yellow_exclude_regex, words, value = TRUE)
   # Yellow includes filter
   yellow_includes <- lapply(yellows, function(x) if (identical(x, '')) character(0) else x)
@@ -63,7 +63,7 @@ filter_yellows <- function(words, yellows){
 #' @param greens greens, see [filter_greens()]
 #' @returns A vector of possible words
 #' @export
-show_words <- function(grays = "", yellows, greens = "-----"){
+show_words <- function(grays = "", yellows = rep("", 5), greens = "-----"){
   # Grays filter
   words <- filter_grays(wordle::words, grays)
   # Greens filter

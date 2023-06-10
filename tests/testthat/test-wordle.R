@@ -1,45 +1,29 @@
 test_that("show_word works", {
-  result <- expect_no_error(
+  expect_no_error(result0 <- show_words())
+  expect_equal(result0, words)
+  result1 <- expect_no_error(
     show_words(
       grays = 'DEUWTVL',
-      yellows = list('',
-                     '',
-                     'I',
-                     '',
-                     ''),
+      yellows = c("", "", "I", "", ""),
       greens = 'A-AI-')
     )
-  expect_true('AGAIN' %in% result)
-  expect_true(! 'AVAIL' %in% result)
-  expect_length(result, 4)
-})
-
-test_that("show_word() is-insensitive", {
-  result1 <- show_words(
-    grays = 'DEUWTVL',
-    yellows = list('',
-                   '',
-                   'I',
-                   '',
-                   ''),
-    greens = 'A-AI-')
+  expect_true('AGAIN' %in% result1)
+  expect_true(! 'AVAIL' %in% result1)
+  expect_length(result1, 4)
   result2 <- show_words(
     grays = 'deuwtvl',
-    yellows = list('',
-                   '',
-                   'i',
-                   '',
-                   ''),
+    yellows = c("", "", "i", "", ""),
     greens = 'a-ai-')
   expect_equal(result1, result2)
 })
 
 test_that("filter_grays works", {
   expect_error(filter_grays(words, "A,"), 'Non-alpha character in grays')
-  # blank grays vector
   expect_no_error(result <- filter_grays(words, grays = ""))
-  # default argument
   expect_equal(filter_grays(words), result)
+  expect_equal(
+    filter_grays(c('ABCDE', 'FFFFF'), 'CG'),
+    'FFFFF')
 })
 
 test_that("filter_greens works", {
@@ -47,4 +31,15 @@ test_that("filter_greens works", {
   expect_no_error(filter_greens(words, 'A--I-'))
   expect_no_error(filter_greens(words))
   expect_error(filter_greens(words, "ABCD,"), 'Only letters and hyphen placeholders are allowed in greens')
+  expect_equal(
+    filter_greens(c('ABCDE', 'ACBDE'), '-B---'),
+    'ABCDE')
+})
+
+test_that("filter_yellows works", {
+  expect_no_error(filter_yellows(words, c("", "", "I", "", "")))
+  expect_no_error(filter_yellows(words))
+  expect_equal(
+    filter_yellows(c('ABCDE', 'BCDEF', 'GGGGA'), c("A", "", "", "", "")),
+    'GGGGA')
 })
