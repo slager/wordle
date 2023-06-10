@@ -14,10 +14,12 @@ filter_grays <- function(words, grays = ""){
 #' Filter word list to only include those that match pattern in greens
 #'
 #' @param words A character vector of words to filter.
-#' @param greens A single string, e.g. `"A--I-"`. Greens are letters, and hyphens are placeholders for non-greens.
+#' @param greens A single string, e.g. `"A--I-"`. Letters are greens and hyphens are non-greens.
 #' @returns A character vector of filtered words
-filter_greens <- function(words, greens){
+filter_greens <- function(words, greens = "-----"){
   greens <- toupper(greens)
+  if (nchar(greens) != 5) stop('Greens needs to be a string of length 5')
+  if (!grepl('^[A-Z-]+$', greens)) stop('Only letters and hyphen placeholders are allowed in greens')
   green_vec <- strsplit(greens, "")[[1]]
   green_regex <- paste(
     sapply(green_vec,

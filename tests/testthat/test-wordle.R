@@ -41,3 +41,10 @@ test_that("filter_grays works", {
   # default argument
   expect_equal(filter_grays(words), result)
 })
+
+test_that("filter_greens works", {
+  expect_error(filter_greens(words, 'ABCD'), 'Greens needs to be a string of length 5')
+  expect_no_error(filter_greens(words, 'A--I-'))
+  expect_no_error(filter_greens(words))
+  expect_error(filter_greens(words, "ABCD,"), 'Only letters and hyphen placeholders are allowed in greens')
+})
