@@ -4,7 +4,7 @@
 \alias{filter_grays}
 \title{Filter word list to exclude those with gray letters}
 \usage{
-filter_grays(words, grays)
+filter_grays(words, grays = "")
 }
 \arguments{
 \item{words}{A character vector of words to filter.}

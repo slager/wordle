@@ -9,7 +9,7 @@ filter_greens(words, greens)
 \arguments{
 \item{words}{A character vector of words to filter.}
 
-\item{greens}{A character vector of length one, e.g. \code{"A--I-"}. Greens are letters, and hyphens are placeholders for non-greens.}
+\item{greens}{A single string, e.g. \code{"A--I-"}. Greens are letters, and hyphens are placeholders for non-greens.}
 }
 \value{
 A character vector of filtered words

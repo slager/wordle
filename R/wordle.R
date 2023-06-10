@@ -54,6 +54,13 @@ filter_yellows <- function(words, yellows){
   grep(yellow_include_regex, words, perl = TRUE, value = TRUE)
 }
 
+#' Show possible wordle words
+#'
+#' @param grays grays, see [filter_grays()]
+#' @param yellows yellows, see [filter_yellows()]
+#' @param greens greens, see [filter_greens()]
+#' @returns A vector of possible words
+#' @export
 show_words <- function(grays = "", yellows, greens = "-----"){
   # Grays filter
   words <- filter_grays(wordle::words, grays)
