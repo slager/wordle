@@ -1,5 +1,4 @@
-words_path <- system.file('data-raw', 'words_alpha.txt', package = 'wordle')
-words <- suppressWarnings(readLines(words_path))
+words <- readLines('https://raw.githubusercontent.com/dwyl/english-words/master/words_alpha.txt')
 words <- toupper(words)
 words <- words[nchar(words) == 5]
 
