@@ -37,7 +37,9 @@ filter_greens <- function(words, greens = "-----"){
 #' @param yellows A character vector of length 5. Each element is a string of yellows at that position. If no yellows at a position, string should be "".
 #' @returns A character vector of filtered words
 filter_yellows <- function(words, yellows = rep("", 5)){
-  yellows <- lapply(yellows, toupper)
+  yellows <- toupper(yellows)
+  if (length(yellows) != 5) stop("Yellows must have length 5")
+  if (!all(grepl('^[A-Z]*$', yellows))) stop("Non-letter found in yellows")
   # Yellow excludes filter
   yellow_exclude_regex <-
     sapply(yellows, function(i){

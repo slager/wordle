@@ -37,6 +37,12 @@ test_that("filter_greens works", {
 })
 
 test_that("filter_yellows works", {
+  expect_error(
+    filter_yellows(words, c("V", "", "I;", "", "")),
+    "Non-letter found in yellows")
+  expect_error(
+    filter_yellows(words, c("V", "", "")),
+    "Yellows must have length 5")
   expect_no_error(filter_yellows(words, c("", "", "I", "", "")))
   expect_no_error(filter_yellows(words))
   expect_equal(
