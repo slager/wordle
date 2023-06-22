@@ -7,7 +7,7 @@
 \format{
 \subsection{\code{words}}{
 
-A character vector of length 15918:
+A character vector of length 15920:
 }
 }
 \source{
