@@ -4,7 +4,7 @@
 \alias{show_words}
 \title{Show possible wordle words}
 \usage{
-show_words(grays = "", yellows, greens = "-----")
+show_words(grays = "", yellows = rep("", 5), greens = "-----")
 }
 \arguments{
 \item{grays}{grays, see \code{\link[=filter_grays]{filter_grays()}}}

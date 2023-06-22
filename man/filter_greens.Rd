@@ -4,12 +4,12 @@
 \alias{filter_greens}
 \title{Filter word list to only include those that match pattern in greens}
 \usage{
-filter_greens(words, greens)
+filter_greens(words, greens = "-----")
 }
 \arguments{
 \item{words}{A character vector of words to filter.}
 
-\item{greens}{A single string, e.g. \code{"A--I-"}. Greens are letters, and hyphens are placeholders for non-greens.}
+\item{greens}{A single string, e.g. \code{"A--I-"}. Letters are greens and hyphens are non-greens.}
 }
 \value{
 A character vector of filtered words

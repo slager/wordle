@@ -4,12 +4,12 @@
 \alias{filter_yellows}
 \title{Filter word list to those consistent with yellows}
 \usage{
-filter_yellows(words, yellows)
+filter_yellows(words, yellows = rep("", 5))
 }
 \arguments{
 \item{words}{A character vector of words to filter.}
 
-\item{yellows}{A list of length 5. Each element is a character vector of yellows at that position.}
+\item{yellows}{A character vector of length 5. Each element is a string of yellows at that position. If no yellows at a position, string should be "".}
 }
 \value{
 A character vector of filtered words
