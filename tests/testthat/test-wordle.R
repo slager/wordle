@@ -48,4 +48,10 @@ test_that("filter_yellows works", {
   expect_equal(
     filter_yellows(c('ABCDE', 'BCDEF', 'GGGGA'), c("A", "", "", "", "")),
     'GGGGA')
+  # multi-yellow positions are split into single letters before regex
+  expect_equal(
+    filter_yellows(c("BASTE", "CASTE", "HASTE", "PASTE", "TASTE", "WASTE"),
+                   c('as', 't', 'at', 's', '')),
+    c("BASTE", "CASTE", "HASTE", "PASTE", "TASTE", "WASTE")
+  )
 })

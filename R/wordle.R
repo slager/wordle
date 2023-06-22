@@ -52,7 +52,13 @@ filter_yellows <- function(words, yellows = rep("", 5)){
   yellow_exclude_regex <- paste(yellow_exclude_regex, collapse = '')
   words <- grep(yellow_exclude_regex, words, value = TRUE)
   # Yellow includes filter
-  yellow_includes <- lapply(yellows, function(x) if (identical(x, '')) character(0) else x)
+  yellow_includes <- lapply(yellows, function(x){
+    if (identical(x, "")){
+      character(0)
+    } else {
+      strsplit(x, "")[[1]]
+    }
+  })
   yellow_includes <- Reduce(c, yellow_includes)
   yellow_include_regex <- paste0("^(?=.*", paste(yellow_includes, collapse = ")(?=.*"), ").+$")
   grep(yellow_include_regex, words, perl = TRUE, value = TRUE)
