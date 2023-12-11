@@ -1,10 +1,13 @@
 #' Show possible wordle words v.2
 #'
 #' @param word_vec Ordered character vector of guessed words
-#' @param color_vec Ordered character vector of colors of guessed words
-#' @param master_wordlist Master word list to use, use default unless testing
+#' @param color_vec Ordered character vector of colors of guessed words, see [collect_colors()] for format
+#' @param master_wordlist Master word list to use. This argument usually omitted.
 #'
 #' @returns A vector of possible words
+#' @examples
+#' show_words(c('AROSE', 'UNITY', 'DINGY'),
+#'            c('-GG--', '-YY-G', '-YY-G'))
 #' @export
 show_words <- function(word_vec = character(0),
                         color_vec = character(0),
@@ -41,8 +44,10 @@ process_word <- function(words, word, colors){
 #' Extract structured vectors from colors string
 #'
 #' @param colors String of length 5, G = green, Y = yellow, '-' = gray
-#'
+#' @examples
+#' collect_colors('-YY-G')
 #' @returns Named list of 3 logical vectors indicating color
+#' @export
 collect_colors <- function(colors){
   # sanitize input
   colors <- unlist(strsplit(toupper(colors), ''))

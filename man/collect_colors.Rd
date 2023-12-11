@@ -15,3 +15,6 @@ Named list of 3 logical vectors indicating color
 \description{
 Extract structured vectors from colors string
 }
+\examples{
+collect_colors('-YY-G')
+}
