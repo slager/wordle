@@ -4,15 +4,17 @@
 \alias{filter_grays}
 \title{Filter word list to exclude those with gray letters}
 \usage{
-filter_grays(words, grays = "")
+filter_grays(words, word, colors)
 }
 \arguments{
-\item{words}{A character vector of words to filter.}
+\item{words}{Input word vector}
 
-\item{grays}{A string containing gray wordle letters, e.g. \code{"ABOPD"}}
+\item{word}{Word to process}
+
+\item{colors}{Output from \code{\link[=collect_colors]{collect_colors()}} for this word}
 }
 \value{
-A character vector of filtered words
+Output word vector
 }
 \description{
 Filter word list to exclude those with gray letters

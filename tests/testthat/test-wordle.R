@@ -1,57 +1,43 @@
-test_that("show_word works", {
-  expect_no_error(result0 <- show_words())
-  expect_equal(result0, words)
-  result1 <- expect_no_error(
-    show_words(
-      grays = 'DEUWTVL',
-      yellows = c("", "", "I", "", ""),
-      greens = 'A-AI-')
+test_that("show_words works", {
+  expect_no_error(result2 <- show_words())
+  expect_equal(result2, words)
+  expect_no_error(result22 <- show_words(
+    c('AROSE', 'AERIE', 'ALURE'), c('GY--G', 'G-Y-G', 'G-GGG')))
+  expect_true('AZURE' %in% result22)
+  expect_no_error(result23 <- show_words(
+    c('AROSE', 'UNITY', 'DINGY'), c('-GG--', '-YY-G', '-YY-G')))
+  expect_equal('IRONY', result23)
+})
+
+test_that("errors as expected", {
+  # collect_colors()
+  expect_error(
+    show_words('AROSE', 'GGA--'),
+    "color_vec elements may only contain 'G', 'Y', or '-'"
     )
-  expect_true('AGAIN' %in% result1)
-  expect_true(! 'AVAIL' %in% result1)
-  expect_length(result1, 4)
-  result2 <- show_words(
-    grays = 'deuwtvl',
-    yellows = c("", "", "i", "", ""),
-    greens = 'a-ai-')
-  expect_equal(result1, result2)
+  expect_error(
+    show_words('AROSE', 'GA--'),
+    "each element of color_vec must contain 5 characters"
+  )
+  # show_words()
+  expect_error(
+    show_words(c('AROSE', 'ALFLF'), 'GGA--'),
+    "word_vec and color_vec must be same length"
+    )
+  # process_word()
+  expect_error(
+    show_words('AR=SE', 'GG---'),
+    "word may not contain non-alpha characters"
+    )
+  expect_error(
+    show_words('AOSE', 'GGA--'),
+    "each element of word_vec must contain 5 characters"
+  )
 })
 
 test_that("filter_grays works", {
-  expect_error(filter_grays(words, "A,"), 'Non-alpha character in grays')
-  expect_no_error(result <- filter_grays(words, grays = ""))
-  expect_equal(filter_grays(words), result)
+  # filters nothing when no gray letters in word
   expect_equal(
-    filter_grays(c('ABCDE', 'FFFFF'), 'CG'),
-    'FFFFF')
-})
-
-test_that("filter_greens works", {
-  expect_error(filter_greens(words, 'ABCD'), 'Greens needs to be a string of length 5')
-  expect_no_error(filter_greens(words, 'A--I-'))
-  expect_no_error(filter_greens(words))
-  expect_error(filter_greens(words, "ABCD,"), 'Only letters and hyphen placeholders are allowed in greens')
-  expect_equal(
-    filter_greens(c('ABCDE', 'ACBDE'), '-B---'),
-    'ABCDE')
-})
-
-test_that("filter_yellows works", {
-  expect_error(
-    filter_yellows(words, c("V", "", "I;", "", "")),
-    "Non-letter found in yellows")
-  expect_error(
-    filter_yellows(words, c("V", "", "")),
-    "Yellows must have length 5")
-  expect_no_error(filter_yellows(words, c("", "", "I", "", "")))
-  expect_no_error(filter_yellows(words))
-  expect_equal(
-    filter_yellows(c('ABCDE', 'BCDEF', 'GGGGA'), c("A", "", "", "", "")),
-    'GGGGA')
-  # multi-yellow positions are split into single letters before regex
-  expect_equal(
-    filter_yellows(c("BASTE", "CASTE", "HASTE", "PASTE", "TASTE", "WASTE"),
-                   c('as', 't', 'at', 's', '')),
-    c("BASTE", "CASTE", "HASTE", "PASTE", "TASTE", "WASTE")
-  )
+    wordle:::filter_grays(
+      wordle::words, 'AROSE', wordle:::collect_colors('YYYYY')), words)
 })

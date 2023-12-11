@@ -2,18 +2,20 @@
 % Please edit documentation in R/wordle.R
 \name{filter_greens}
 \alias{filter_greens}
-\title{Filter word list to only include those that match pattern in greens}
+\title{Filter word list for green letters}
 \usage{
-filter_greens(words, greens = "-----")
+filter_greens(words, word, colors)
 }
 \arguments{
-\item{words}{A character vector of words to filter.}
+\item{words}{Input word vector}
 
-\item{greens}{A single string, e.g. \code{"A--I-"}. Letters are greens and hyphens are non-greens.}
+\item{word}{Word to process}
+
+\item{colors}{Output from \code{\link[=collect_colors]{collect_colors()}} for this word}
 }
 \value{
-A character vector of filtered words
+Output word vector
 }
 \description{
-Filter word list to only include those that match pattern in greens
+Filter word list for green letters
 }

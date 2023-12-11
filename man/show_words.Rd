@@ -2,20 +2,24 @@
 % Please edit documentation in R/wordle.R
 \name{show_words}
 \alias{show_words}
-\title{Show possible wordle words}
+\title{Show possible wordle words v.2}
 \usage{
-show_words(grays = "", yellows = rep("", 5), greens = "-----")
+show_words(
+  word_vec = character(0),
+  color_vec = character(0),
+  master_wordlist = wordle::words
+)
 }
 \arguments{
-\item{grays}{grays, see \code{\link[=filter_grays]{filter_grays()}}}
+\item{word_vec}{Ordered character vector of guessed words}
 
-\item{yellows}{yellows, see \code{\link[=filter_yellows]{filter_yellows()}}}
+\item{color_vec}{Ordered character vector of colors of guessed words}
 
-\item{greens}{greens, see \code{\link[=filter_greens]{filter_greens()}}}
+\item{master_wordlist}{Master word list to use, use default unless testing}
 }
 \value{
 A vector of possible words
 }
 \description{
-Show possible wordle words
+Show possible wordle words v.2
 }

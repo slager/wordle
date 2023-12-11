@@ -2,18 +2,20 @@
 % Please edit documentation in R/wordle.R
 \name{filter_yellows}
 \alias{filter_yellows}
-\title{Filter word list to those consistent with yellows}
+\title{Filter word list for yellow letters}
 \usage{
-filter_yellows(words, yellows = rep("", 5))
+filter_yellows(words, word, colors)
 }
 \arguments{
-\item{words}{A character vector of words to filter.}
+\item{words}{Input word vector}
 
-\item{yellows}{A character vector of length 5. Each element is a string of yellows at that position. If no yellows at a position, string should be "".}
+\item{word}{Word to process}
+
+\item{colors}{Output from \code{\link[=collect_colors]{collect_colors()}} for this word}
 }
 \value{
-A character vector of filtered words
+Output word vector
 }
 \description{
-Filter word list to those consistent with yellows
+Filter word list for yellow letters
 }
