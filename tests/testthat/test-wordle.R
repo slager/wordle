@@ -7,6 +7,10 @@ test_that("show_words works", {
   expect_no_error(result23 <- show_words(
     c('AROSE', 'UNITY', 'DINGY'), c('-GG--', '-YY-G', '-YY-G')))
   expect_equal('IRONY', result23)
+  # double letter with 1 green and 1 gray works
+  expect_true('BEGET' %in% show_words('GIGAS','--G--'))
+  # double letter with 1 yellow and 1 gray works
+  expect_true('BEGET' %in% show_words('TITLE','Y---Y'))
 })
 
 test_that("errors as expected", {
