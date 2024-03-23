@@ -2,7 +2,7 @@
 % Please edit documentation in R/wordle.R
 \name{filter_grays}
 \alias{filter_grays}
-\title{Filter word list to exclude those with gray letters}
+\title{Exclude words with gray-only letters, or too many of a letter when known}
 \usage{
 filter_grays(words, word, colors)
 }
@@ -17,5 +17,5 @@ filter_grays(words, word, colors)
 Output word vector
 }
 \description{
-Filter word list to exclude those with gray letters
+Exclude words with gray-only letters, or too many of a letter when known
 }

@@ -95,7 +95,7 @@ filter_yellows <- function(words, word, colors){
   words
 }
 
-#' Filter word list to exclude those with gray letters
+#' Exclude words with gray-only letters, or too many of a letter when known
 #'
 #' @param words Input word vector
 #' @param word Word to process
@@ -103,12 +103,18 @@ filter_yellows <- function(words, word, colors){
 #'
 #' @returns Output word vector
 filter_grays <- function(words, word, colors){
-  # filter out words with gray letters
-  # unless same letter also present as yellow or green
-  letters_to_exclude <- word[colors$gray][! word[colors$gray] %in%
-                                            union(word[colors$yellow],
-                                                  word[colors$green])]
-  if (length(letters_to_exclude) == 0) return(words)
-  grays_regex <- paste0('^[^', paste(letters_to_exclude, collapse = ""), ']+$')
-  grep(grays_regex, words, value = TRUE)
+  # counts of grays
+  gray_f <- sapply(unique(word), function(i) sum(grepl(i, word[colors$gray])))
+  # counts of yellows and greens
+  yg_f <- sapply(unique(word), function(i){
+    sum(grepl(i, word[colors$yellow | colors$green]))
+  })
+  # frequencies above which to filter out
+  ff <- (gray_f + yg_f)[gray_f > 0]
+  fl <- names(ff)
+  if (length(ff) == 0) return(words)
+  re <- sapply(seq_along(ff),
+               function(i) paste0(rep(fl[i], ff[i]), collapse = '.*'))
+  re <- paste(re, collapse = '|')
+  grep(re, words, value = TRUE, invert = TRUE)
 }
