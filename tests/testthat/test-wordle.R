@@ -11,6 +11,11 @@ test_that("show_words works", {
   expect_true('BEGET' %in% show_words('GIGAS','--G--'))
   # double letter with 1 yellow and 1 gray works
   expect_true('BEGET' %in% show_words('TITLE','Y---Y'))
+  # filter out two Es when we know there's only 1
+  expect_true(
+    ! 'SHEET' %in% show_words(
+      c('AROSE','UNITY','BESET'), c('---YY', '---Y-', '-YY-G'))
+  )
 })
 
 test_that("errors as expected", {
